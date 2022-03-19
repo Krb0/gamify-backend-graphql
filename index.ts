@@ -12,7 +12,7 @@ const typeDefs = gql`
     rating: String
     released: String!
     backgroundImage: String
-    description: String!
+    description: String
     playtime: Int!
     platforms: [PlatformContainer]!
   }
@@ -96,11 +96,14 @@ const resolvers = {
     backgroundImage: (root: any) => {
       return root.background_image;
     },
+    description: (root: any) => {
+      return root.description_raw;
+    },
   },
 };
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
 server
-  .listen(5000)
+  .listen(4000)
   .then(({ url }) => console.log(`🚀  Server ready at ${url}`));
